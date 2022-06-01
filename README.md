@@ -7,7 +7,7 @@ Angular front
 
 ## Back end
 
-NodeJs back 
+NodeJs back
 
 ## How to run it ? 
 
