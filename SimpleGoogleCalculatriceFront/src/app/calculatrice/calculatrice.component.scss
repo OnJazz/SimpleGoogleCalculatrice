@@ -29,7 +29,7 @@
             margin-bottom: 8px;
         }
 
-        .lowerElement {
+        #lowerElement {
             display: flex;
             justify-content: end;
             font-size: 30px;
@@ -37,6 +37,7 @@
             height: 32px;
             border: none;
             width: 100%;
+            outline: none;
         }
 
         .lowerElement:focus {

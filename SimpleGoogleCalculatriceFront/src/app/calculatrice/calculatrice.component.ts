@@ -91,6 +91,7 @@ export class CalculatriceComponent implements OnInit {
       this.deletePrevious();
     }
     else this.addValue(value);
+    document.getElementById("lowerElement")?.focus();
   }
 
   deletePrevious = () => {
