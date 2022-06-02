@@ -1,10 +1,10 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
 
 
 //routes
-const calculatriceRoutes = require('./calculatrice/calculatrice.router.ts');
+import { router } from './calculatrice/calculatrice.router';
 
 const app = express();
 const port = 3000;
@@ -18,10 +18,9 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 // REQUETES POUR CALCULER
-app.use('/calcul', calculatriceRoutes);
+app.use('/calcul', router);
 
 app.get('/', (req, res) => {
-    console.log("connard")
     res.send('Hello World!');
 });
 

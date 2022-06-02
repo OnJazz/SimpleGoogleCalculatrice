@@ -1,0 +1,32 @@
+<mat-card class="mainContent">
+    <mat-card-content>
+        <div class="fakeTextArea">
+            <div class="upperElement">
+                <button>clique ici</button>
+                {{answer}}
+            </div>
+            <div class="lowerElement" (keypress)="checkKeyPress($event)" tabindex="0">{{txt}}</div>
+        </div>
+        <div class="buttonContainer">
+            <app-button class="buttonAlone" [txtButton]="resetButton" (isClickedEvent)="updateTxtValue($event)">
+            </app-button>
+            <app-button [txtButton]="'7'" (isClickedEvent)="updateTxtValue($event)"></app-button>
+            <app-button [txtButton]="'8'" (isClickedEvent)="updateTxtValue($event)"></app-button>
+            <app-button [txtButton]="'9'" (isClickedEvent)="updateTxtValue($event)"></app-button>
+            <app-button [txtButton]="'÷'" (isClickedEvent)="updateTxtValue($event)"></app-button>
+            <app-button [txtButton]="'4'" (isClickedEvent)="updateTxtValue($event)"></app-button>
+            <app-button [txtButton]="'5'" (isClickedEvent)="updateTxtValue($event)"></app-button>
+            <app-button [txtButton]="'6'" (isClickedEvent)="updateTxtValue($event)"></app-button>
+            <app-button [txtButton]="'x'" (isClickedEvent)="updateTxtValue($event)"></app-button>
+            <app-button [txtButton]="'1'" (isClickedEvent)="updateTxtValue($event)"></app-button>
+            <app-button [txtButton]="'2'" (isClickedEvent)="updateTxtValue($event)"></app-button>
+            <app-button [txtButton]="'3'" (isClickedEvent)="updateTxtValue($event)"></app-button>
+            <app-button [txtButton]="'-'" (isClickedEvent)="updateTxtValue($event)"></app-button>
+            <app-button [txtButton]="'0'" (isClickedEvent)="updateTxtValue($event)"></app-button>
+            <app-button [txtButton]="'.'" (isClickedEvent)="updateTxtValue($event)"></app-button>
+            <app-button [txtButton]="'='" (isClickedEvent)="updateTxtValue($event)"></app-button>
+            <app-button [txtButton]="'+'" (isClickedEvent)="updateTxtValue($event)"></app-button>
+        </div>
+        <!-- <button mat-stroked-button (click)="sendRequest()">clique ici</button> -->
+    </mat-card-content>
+</mat-card>

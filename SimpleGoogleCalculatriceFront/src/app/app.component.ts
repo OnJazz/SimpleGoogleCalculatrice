@@ -7,12 +7,7 @@ import { CalculRequestService } from './services/calcul-request.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'SimpleGoogleCalculatriceFront';
-  constructor(private calculService: CalculRequestService) { }
 
-  sendRequest = () => {
-    this.calculService.getResultFromCalcul("2+2").subscribe(res => {
-      console.log(res);
-    });
-  }
+  constructor() { }
+
 }

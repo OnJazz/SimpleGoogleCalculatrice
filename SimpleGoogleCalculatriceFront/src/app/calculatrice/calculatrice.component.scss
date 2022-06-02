@@ -1,0 +1,72 @@
+.mainContent {
+    height: 35%;
+    width: 20%;
+    margin-left: auto;
+    margin-right: auto;
+
+    mat-card-content {
+        height: 100%;
+    }
+
+    .fakeTextArea {
+        width: 98.5%;
+        height: 25%;
+        border: 1px solid #ebebeb;
+        border-radius: 8px;
+        margin: auto;
+        padding: 10px 14px 0 10px;
+        box-sizing: border-box;
+
+        .upperElement {
+            display: flex;
+            justify-content: space-between;
+            color: #70757a;
+            font-size: 13px;
+            width: 100%;
+            font-family: arial, sans-serif;
+            white-space: nowrap;
+            margin-top: 3px;
+            margin-bottom: 8px;
+        }
+
+        .lowerElement {
+            display: flex;
+            text-align: end;
+            font-size: 30px;
+            font-family: arial, sans-serif;
+            height: 32px;
+            border: none;
+            width: 100%;
+        }
+
+        .lowerElement:focus {
+            outline: none;
+            caret-color: transparent;
+        }
+    }
+
+    .fakeTextArea:hover {
+        border: solid 1px black;
+    }
+
+    .fakeTextArea:focus-within {
+        border: solid 1px blue;
+    }
+
+
+
+    .buttonContainer {
+        display: flex;
+        flex-wrap: wrap;
+        height: 70%;
+        margin-top: 5%;
+
+        app-button {
+            width: 25%;
+        }
+
+        .buttonAlone {
+            width: 100%;
+        }
+    }
+}
