@@ -5,7 +5,7 @@
                 <button>clique ici</button>
                 {{answer}}
             </div>
-            <div class="lowerElement" (keypress)="checkKeyPress($event)" tabindex="0">{{txt}}</div>
+            <div class="lowerElement" (keydown)="checkKeyPress($event)" tabindex="0">{{txt}}</div>
         </div>
         <div class="buttonContainer">
             <app-button class="buttonAlone" [txtButton]="resetButton" (isClickedEvent)="updateTxtValue($event)">

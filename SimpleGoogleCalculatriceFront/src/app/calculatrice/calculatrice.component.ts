@@ -31,7 +31,6 @@ export class CalculatriceComponent implements OnInit {
   checkKeyPress = (event: KeyboardEvent) => {
     let length = this.txt.length;
     let lastChar = this.txt.substring(length - 1);
-    console.log(event)
     if (this.validKey.includes(event.key)) {
       if (event.key == "/") {
         if (lastChar == "x" || lastChar == "+" || lastChar == "-") {
@@ -62,7 +61,10 @@ export class CalculatriceComponent implements OnInit {
         else if (lastChar != event.key) this.txt += event.key
       }
       else if (event.key == "Enter") this.sendRequest();
-      else if (event.key == "Backspace") console.log(this.txt);
+      else if (event.key == "Backspace") {
+        if (length == 1) this.txt = "0";
+        else this.txt = this.txt.substring(0, length - 1);
+      }
       else {
         if (this.txt == "0") this.txt = event.key;
         else this.txt += event.key;
