@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HistoryElement } from '../beans/historyElement';
 import { CalculRequestService } from '../services/calcul-request.service';
 
 @Component({
@@ -13,6 +14,8 @@ export class CalculatriceComponent implements OnInit {
   validKey: string[] = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "*", "/", ".", "Enter", "Backspace"];
   resetButton: string = "CE";
   canAddDot: boolean = true;
+  displayPanel = false;
+  historyList: HistoryElement[] = [];
   constructor(private calculService: CalculRequestService) { }
 
   ngOnInit(): void {
@@ -21,6 +24,7 @@ export class CalculatriceComponent implements OnInit {
   sendRequest = () => {
     this.calculService.getResultFromCalcul(this.txt).subscribe(res => {
       console.log(res)
+      this.historyList.push({ calcul: this.txt, res: res });
       this.answer = res;
     });
   }
@@ -159,5 +163,9 @@ export class CalculatriceComponent implements OnInit {
       this.resetButton = "AC";
       this.sendRequest();
     }
+  }
+  hasClickedOnHistory = (clickedElement: string) => {
+    this.txt = clickedElement;
+    this.resetButton = "CE"
   }
 }

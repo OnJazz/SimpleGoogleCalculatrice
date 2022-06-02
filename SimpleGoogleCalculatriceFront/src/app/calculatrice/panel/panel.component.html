@@ -1,0 +1,25 @@
+<mat-expansion-panel hideToggle class="mainContent" [expanded]="true">
+    <mat-expansion-panel-header (click)="sendParentClosePanel()">
+        <mat-panel-title>
+            <mat-icon>access_time</mat-icon>
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <table *ngFor=" let elt of historyList">
+        <td>
+            <mat-card class="miniCard" (click)="hasClickedOnCalc(elt.calcul)">
+                <mat-card-content>
+                    {{elt.calcul}}
+                </mat-card-content>
+            </mat-card>
+        </td>
+        <td> = </td>
+        <mat-card class="miniCard" (click)="hasClickedOnRes(elt.res)">
+            <mat-card-content>
+                {{elt.res}}
+            </mat-card-content>
+        </mat-card>
+    </table>
+    <div *ngIf="historyList.length ==0">
+        Vos calculs et vos résultats s'affichent ici pour que vous puissiez les réutiliser
+    </div>
+</mat-expansion-panel>

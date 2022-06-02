@@ -2,7 +2,11 @@
     <mat-card-content>
         <div class="fakeTextArea">
             <div class="upperElement">
-                <button>clique ici</button>
+                <mat-icon *ngIf="!displayPanel" (click)="displayPanel=true">access_time</mat-icon>
+                <app-panel *ngIf="displayPanel" [historyList]="historyList" (closePanelEvent)="displayPanel=false"
+                    (hasClickedOnCalcEvent)="hasClickedOnHistory($event)"
+                    (hasClickedOnResEvent)="hasClickedOnHistory($event)">
+                </app-panel>
                 {{answer}}
             </div>
             <div class="lowerElement" (keydown)="checkKeyPress($event)" tabindex="0">{{txt}}</div>

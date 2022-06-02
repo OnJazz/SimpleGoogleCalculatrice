@@ -11,12 +11,16 @@ import { MatCardModule } from '@angular/material/card';
 import { ButtonComponent } from './calculatrice/button/button.component';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { PanelComponent } from './calculatrice/panel/panel.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
     AppComponent,
     CalculatriceComponent,
-    ButtonComponent
+    ButtonComponent,
+    PanelComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +30,9 @@ import { FormsModule } from '@angular/forms';
     MatButtonModule,
     MatCardModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatExpansionModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
