@@ -23,9 +23,10 @@ export class CalculatriceComponent implements OnInit {
 
   sendRequest = () => {
     this.calculService.getResultFromCalcul(this.txt).subscribe(res => {
+      res = "" + res;
       this.historyList.push({ calcul: this.txt, res: res });
       this.answer = this.txt + " =";
-      this.txt = "" + res;
+      this.txt = res;
       this.checkIfCanAddDot(this.txt);
     });
   }
