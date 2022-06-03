@@ -50,10 +50,7 @@ export class CalculatriceComponent implements OnInit {
         this.addSoustraction(lastChar, length);
       }
       else if (event.key == ".") {
-        if (lastChar != "." && this.canAddDot) {
-          this.txt += event.key;
-          this.canAddDot = false;
-        }
+        this.addDot(lastChar);
       }
       else if (event.key == "Enter") {
         this.egalTreatment(lastChar);
@@ -82,6 +79,7 @@ export class CalculatriceComponent implements OnInit {
     else if (value == "+") this.addAddition(lastChar, length);
     else if (value == "x") this.addMultiplication(lastChar, length);
     else if (value == "÷") this.addDivision(lastChar, length);
+    else if (value == ".") this.addDot(lastChar);
     else if (value == "AC") {
       this.answer = "Ans = " + this.txt;
       this.txt = "0";
@@ -156,6 +154,13 @@ export class CalculatriceComponent implements OnInit {
     else if (lastChar != "-") {
       this.canAddDot = true;
       this.txt += "-";
+    }
+  }
+
+  addDot(lastChar: string) {
+    if (lastChar != "." && this.canAddDot) {
+      this.txt += ".";
+      this.canAddDot = false;
     }
   }
 
