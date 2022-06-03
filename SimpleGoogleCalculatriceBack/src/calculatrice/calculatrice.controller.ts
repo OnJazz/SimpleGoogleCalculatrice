@@ -4,7 +4,7 @@ export class CalculController {
 
     calcul = (req: { body: { calcul: any; }; }, res: { json: (arg0: any) => any; }, next: any) => {
         let calculAsString = req.body.calcul;
-        return res.json(this.calcFromString(calculAsString));
+        return res.json("" + this.calcFromString(calculAsString));
     }
     calcFromString = (mystring: string): number => {
         if (mystring.includes("+")) {
