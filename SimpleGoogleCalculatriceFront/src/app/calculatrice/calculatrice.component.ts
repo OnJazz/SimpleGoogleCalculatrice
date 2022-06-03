@@ -25,8 +25,13 @@ export class CalculatriceComponent implements OnInit {
     this.calculService.getResultFromCalcul(this.txt).subscribe(res => {
       console.log(res)
       this.historyList.push({ calcul: this.txt, res: res });
-      this.answer = res;
+      this.answer = this.txt + " =";
+      this.txt = "" + res;
+      this.checkIfCanAddDot(this.txt);
     });
+  }
+  checkIfCanAddDot = (txt: string) => {
+    this.canAddDot = !txt.includes(".");
   }
   /**
    * Return a boolean that valid or not the key pressed
@@ -35,16 +40,18 @@ export class CalculatriceComponent implements OnInit {
    */
   checkKeyPress = (event: KeyboardEvent) => {
     let length = this.txt.length;
+    let twoCharBefore = this.txt.substring(length - 2, length - 1);
     let lastChar = this.txt.substring(length - 1);
+    console.log(twoCharBefore);
     if (this.validKey.includes(event.key)) {
       if (event.key == "/") {
-        this.addDivision(lastChar, length);
+        this.addDivision(lastChar, length, twoCharBefore);
       }
       else if (event.key == "*") {
-        this.addMultiplication(lastChar, length);
+        this.addMultiplication(lastChar, length, twoCharBefore);
       }
       else if (event.key == "+") {
-        this.addAddition(lastChar, length);
+        this.addAddition(lastChar, length, twoCharBefore);
       }
       else if (event.key == "-") {
         this.addSoustraction(lastChar, length);
@@ -56,6 +63,8 @@ export class CalculatriceComponent implements OnInit {
         this.egalTreatment(lastChar);
       }
       else if (event.key == "Backspace") {
+        let lastChar = this.txt[this.txt.length - 1];
+        if (lastChar == ".") this.canAddDot = true;
         if (length == 1) this.txt = "0";
         else this.txt = this.txt.substring(0, length - 1);
       }
@@ -71,19 +80,36 @@ export class CalculatriceComponent implements OnInit {
   }
   updateTxtValue = (value: string) => {
     let length = this.txt.length;
+    let twoCharBefore = this.txt.substring(length - 2, length - 1);
     let lastChar = this.txt.substring(length - 1);
     if (value == "=") {
       this.egalTreatment(lastChar);
     }
-    else if (value == "-") this.addSoustraction(lastChar, length);
-    else if (value == "+") this.addAddition(lastChar, length);
-    else if (value == "x") this.addMultiplication(lastChar, length);
-    else if (value == "÷") this.addDivision(lastChar, length);
-    else if (value == ".") this.addDot(lastChar);
+    else if (value == "-") {
+      this.pushAnswer();
+      this.addSoustraction(lastChar, length);
+    }
+    else if (value == "+") {
+      this.pushAnswer();
+      this.addAddition(lastChar, length, twoCharBefore);
+    }
+    else if (value == "x") {
+      this.pushAnswer();
+      this.addMultiplication(lastChar, length, twoCharBefore);
+    }
+    else if (value == "÷") {
+      this.pushAnswer();
+      this.addDivision(lastChar, length, twoCharBefore);
+    }
+    else if (value == ".") {
+      this.pushAnswer();
+      this.addDot(lastChar);
+    }
     else if (value == "AC") {
       this.answer = "Ans = " + this.txt;
       this.txt = "0";
       this.resetButton = "CE";
+      this.canAddDot = true;
     }
     else if (value == "CE") {
       this.deletePrevious();
@@ -94,13 +120,16 @@ export class CalculatriceComponent implements OnInit {
 
   deletePrevious = () => {
     if (this.txt != "0") {
+      let lastChar = this.txt[this.txt.length - 1];
       this.txt = this.txt.substring(0, this.txt.length - 1);
       if (this.txt.length == 0) this.txt = "0";
+      if (lastChar == ".") this.canAddDot = true;
     }
   }
   addValue = (value: string) => {
     if (this.txt == "0") this.txt = value;
     else if (this.resetButton == "AC") {
+      this.answer = "Answ = " + this.txt;
       this.txt = value;
       this.resetButton = "CE";
     }
@@ -108,38 +137,38 @@ export class CalculatriceComponent implements OnInit {
   }
 
 
-  addDivision = (lastChar: string, length: number) => {
+  addDivision = (lastChar: string, length: number, twoCharBefore: string) => {
     if (this.resetButton == "AC") this.resetButton = "CE";
-    if (lastChar == "x" || lastChar == "+" || lastChar == "-") {
+    if ((lastChar == "x" || lastChar == "+") || ((lastChar == "-") && twoCharBefore != "x")) {
       this.txt = this.txt.substring(0, length - 1);
       this.txt += "÷";
     }
-    else if (lastChar != "÷") {
+    else if (lastChar != "÷" && twoCharBefore != "x") {
       this.txt += "÷";
       this.canAddDot = true;
     }
 
   }
 
-  addMultiplication = (lastChar: string, length: number) => {
+  addMultiplication = (lastChar: string, length: number, twoCharBefore: string) => {
     if (this.resetButton == "AC") this.resetButton = "CE";
-    if (lastChar == "÷" || lastChar == "+" || lastChar == "-") {
+    if ((lastChar == "÷" || lastChar == "+") || ((lastChar == "-") && twoCharBefore != "x")) {
       this.txt = this.txt.substring(0, length - 1);
       this.txt += "x";
     }
-    else if (lastChar != "x") {
+    else if (lastChar != "x" && twoCharBefore != "x") {
       this.txt += "x";
       this.canAddDot = true;
     }
   }
 
-  addAddition = (lastChar: string, length: number) => {
+  addAddition = (lastChar: string, length: number, twoCharBefore: string) => {
     if (this.resetButton == "AC") this.resetButton = "CE";
-    if (lastChar == "÷" || lastChar == "x" || lastChar == "-") {
+    if ((lastChar == "÷" || lastChar == "x") || ((lastChar == "-") && twoCharBefore != "x")) {
       this.txt = this.txt.substring(0, length - 1);
       this.txt += "+";
     }
-    else if (lastChar != "+") {
+    else if (lastChar != "+" && twoCharBefore != "x") {
       this.canAddDot = true;
       this.txt += "+";
     }
@@ -147,13 +176,20 @@ export class CalculatriceComponent implements OnInit {
 
   addSoustraction = (lastChar: string, length: number) => {
     if (this.resetButton == "AC") this.resetButton = "CE";
-    if (lastChar == "÷" || lastChar == "x" || lastChar == "+") {
+    if (lastChar == "÷" || lastChar == "+") {
       this.txt = this.txt.substring(0, length - 1);
       this.txt += "-";
     }
     else if (lastChar != "-") {
       this.canAddDot = true;
       this.txt += "-";
+    }
+  }
+
+  pushAnswer() {
+    if (this.resetButton == "AC") {
+      this.answer = "Ans = " + this.txt;
+      this.resetButton = "CE";
     }
   }
 
