@@ -12,8 +12,7 @@ export class CalculController {
             mystring.split("+").map(elt => r += this.calcFromString(elt));
             return r
         }
-        else if (mystring.includes("-")) {
-            console.log(mystring.split("-"))
+        else if (mystring.includes("-") && !mystring.includes("x-") && !mystring.includes("÷-")) {
             let r = this.calcFromString(mystring.split("-")[0]);
             for (let i = 1; i < mystring.split("-").length; i++) {
                 r -= this.calcFromString(mystring.split("-")[i]);

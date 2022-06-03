@@ -23,7 +23,6 @@ export class CalculatriceComponent implements OnInit {
 
   sendRequest = () => {
     this.calculService.getResultFromCalcul(this.txt).subscribe(res => {
-      console.log(res)
       this.historyList.push({ calcul: this.txt, res: res });
       this.answer = this.txt + " =";
       this.txt = "" + res;
@@ -42,7 +41,6 @@ export class CalculatriceComponent implements OnInit {
     let length = this.txt.length;
     let twoCharBefore = this.txt.substring(length - 2, length - 1);
     let lastChar = this.txt.substring(length - 1);
-    console.log(twoCharBefore);
     if (this.validKey.includes(event.key)) {
       if (event.key == "/") {
         this.addDivision(lastChar, length, twoCharBefore);
@@ -69,8 +67,7 @@ export class CalculatriceComponent implements OnInit {
         else this.txt = this.txt.substring(0, length - 1);
       }
       else {
-        if (this.txt == "0") this.txt = event.key;
-        else this.txt += event.key;
+        this.addValue(event.key);
       }
       return true;
     }
@@ -139,11 +136,11 @@ export class CalculatriceComponent implements OnInit {
 
   addDivision = (lastChar: string, length: number, twoCharBefore: string) => {
     if (this.resetButton == "AC") this.resetButton = "CE";
-    if ((lastChar == "x" || lastChar == "+") || ((lastChar == "-") && twoCharBefore != "x")) {
+    if ((lastChar == "x" || lastChar == "+") || ((lastChar == "-") && twoCharBefore != "x" && twoCharBefore != "÷")) {
       this.txt = this.txt.substring(0, length - 1);
       this.txt += "÷";
     }
-    else if (lastChar != "÷" && twoCharBefore != "x") {
+    else if (lastChar != "÷" && twoCharBefore != "x" && twoCharBefore != "÷") {
       this.txt += "÷";
       this.canAddDot = true;
     }
@@ -152,11 +149,11 @@ export class CalculatriceComponent implements OnInit {
 
   addMultiplication = (lastChar: string, length: number, twoCharBefore: string) => {
     if (this.resetButton == "AC") this.resetButton = "CE";
-    if ((lastChar == "÷" || lastChar == "+") || ((lastChar == "-") && twoCharBefore != "x")) {
+    if ((lastChar == "÷" || lastChar == "+") || ((lastChar == "-") && twoCharBefore != "x" && twoCharBefore != "÷")) {
       this.txt = this.txt.substring(0, length - 1);
       this.txt += "x";
     }
-    else if (lastChar != "x" && twoCharBefore != "x") {
+    else if (lastChar != "x" && twoCharBefore != "x" && twoCharBefore != "÷") {
       this.txt += "x";
       this.canAddDot = true;
     }
@@ -164,11 +161,11 @@ export class CalculatriceComponent implements OnInit {
 
   addAddition = (lastChar: string, length: number, twoCharBefore: string) => {
     if (this.resetButton == "AC") this.resetButton = "CE";
-    if ((lastChar == "÷" || lastChar == "x") || ((lastChar == "-") && twoCharBefore != "x")) {
+    if ((lastChar == "÷" || lastChar == "x") || ((lastChar == "-") && twoCharBefore != "x" && twoCharBefore != "÷")) {
       this.txt = this.txt.substring(0, length - 1);
       this.txt += "+";
     }
-    else if (lastChar != "+" && twoCharBefore != "x") {
+    else if (lastChar != "+" && twoCharBefore != "x" && twoCharBefore != "÷") {
       this.canAddDot = true;
       this.txt += "+";
     }
@@ -176,7 +173,7 @@ export class CalculatriceComponent implements OnInit {
 
   addSoustraction = (lastChar: string, length: number) => {
     if (this.resetButton == "AC") this.resetButton = "CE";
-    if (lastChar == "÷" || lastChar == "+") {
+    if (lastChar == "+") {
       this.txt = this.txt.substring(0, length - 1);
       this.txt += "-";
     }
