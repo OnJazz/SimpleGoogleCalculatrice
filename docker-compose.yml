@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+  back:
+    build: SimpleGoogleCalculatriceBack
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+
+  front:
+    build: SimpleGoogleCalculatriceFront
+    ports:
+      - 4200:80

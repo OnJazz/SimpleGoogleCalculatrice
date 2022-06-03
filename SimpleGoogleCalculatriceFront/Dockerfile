@@ -10,6 +10,6 @@ FROM nginx:alpine
 
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 WORKDIR /usr/share/nginx/html
-COPY --from=builder /app/dist/front .
+COPY --from=builder /app/dist/simple-google-calculatrice-front .
 
 CMD ["nginx", "-g", "daemon off;"]
