@@ -21,11 +21,9 @@ export class PanelComponent implements OnInit {
     this.closePanelEvent.emit(false);
   }
   hasClickedOnCalc = (calcul: string) => {
-    console.log(typeof calcul)
     this.hasClickedOnCalcEvent.emit(calcul)
   }
   hasClickedOnRes = (res: string) => {
-    console.log(typeof res);
     this.hasClickedOnResEvent.emit(res);
   }
 
