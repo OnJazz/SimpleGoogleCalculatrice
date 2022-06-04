@@ -1,5 +1,4 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import cors from 'cors';
 
 
@@ -17,12 +16,8 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-// REQUETES POUR CALCULER
+// REQUEST TO CALCUL
 app.use('/calcul', router);
-
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
 
 app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}`);

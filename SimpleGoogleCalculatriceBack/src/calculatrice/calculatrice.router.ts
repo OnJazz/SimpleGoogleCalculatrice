@@ -5,5 +5,5 @@ import { CalculController } from './calculatrice.controller';
 export const router = express.Router();
 export const controller = new CalculController();
 
-// /calcul => GET
+// /calcul => POST
 router.post('/', controller.calcul);

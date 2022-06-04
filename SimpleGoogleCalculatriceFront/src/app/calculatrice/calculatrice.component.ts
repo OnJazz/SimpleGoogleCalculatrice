@@ -10,7 +10,7 @@ import { CalculRequestService } from '../services/calcul-request.service';
 export class CalculatriceComponent implements OnInit {
 
   txt: string = "0";
-  answer: string = "Ans = 4";
+  answer: string = "";
   validKey: string[] = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "*", "/", ".", "Enter", "Backspace"];
   resetButton: string = "CE";
   canAddDot: boolean = true;
@@ -21,6 +21,10 @@ export class CalculatriceComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Send the calcul as a string to the back.
+   * Get Back result then push it to history
+   */
   sendRequest = () => {
     this.calculService.getResultFromCalcul(this.txt).subscribe(res => {
       console.log(res)
@@ -30,11 +34,10 @@ export class CalculatriceComponent implements OnInit {
       this.checkIfCanAddDot(res);
     });
   }
-  // checkIfCanAddDot = (txt: string) => {
-  //   this.canAddDot = !txt.includes(".");
-  // }
+
   /**
    * Return a boolean that valid or not the key pressed
+   * Depending the valid key pressed it does add (soustraction/division/multiplication/addition/deletePrevious/Enter)
    * @param event a KeyBoardEvent 
    * @returns true when it s a valid key pressed. False otherwise
    */
@@ -53,7 +56,7 @@ export class CalculatriceComponent implements OnInit {
         this.addAddition(lastChar, length, twoCharBefore);
       }
       else if (event.key == "-") {
-        this.addSoustraction(lastChar, length);
+        this.addSubstraction(lastChar, length);
       }
       else if (event.key == ".") {
         this.addDot(lastChar, length);
@@ -79,6 +82,10 @@ export class CalculatriceComponent implements OnInit {
       return false
     }
   }
+  /**
+   * Depending the button pressed it does add the action requested (soustraction/division/multiplication/addition/deletePrevious/Enter)
+   * @param value a string representing the value pressed by the button (ex: "+"/"-"....)
+   */
   updateTxtValue = (value: string) => {
     let length = this.txt.length;
     let twoCharBefore = this.txt.substring(length - 2, length - 1);
@@ -88,7 +95,7 @@ export class CalculatriceComponent implements OnInit {
     }
     else if (value == "-") {
       this.pushAnswer();
-      this.addSoustraction(lastChar, length);
+      this.addSubstraction(lastChar, length);
     }
     else if (value == "+") {
       this.pushAnswer();
@@ -119,6 +126,9 @@ export class CalculatriceComponent implements OnInit {
     this.giveFocus();
   }
 
+  /**
+   * Delete previous char
+   */
   deletePrevious = () => {
     if (this.txt != "0") {
       let lastChar = this.txt[this.txt.length - 1];
@@ -127,6 +137,11 @@ export class CalculatriceComponent implements OnInit {
       if (lastChar == ".") this.canAddDot = true;
     }
   }
+  /**
+   * Depending of resetbutton, as AC it replace the value.
+   * Otherwise it add the value to the calcul as string.
+   * @param value a value to add into the calcul as string. Depending valid key it should be (0... 9)
+   */
   addValue = (value: string) => {
     if (this.txt == "0") {
       this.txt = value;
@@ -141,7 +156,12 @@ export class CalculatriceComponent implements OnInit {
     else this.txt += value;
   }
 
-
+  /**
+   * Add division symbol to the calcul as string
+   * @param lastChar a string, the last char of the calcul as string
+   * @param length a number, lenght of the calcul as string 
+   * @param twoCharBefore a string, the char before last char of the calcul as string 
+   */
   addDivision = (lastChar: string, length: number, twoCharBefore: string) => {
     if (this.resetButton == "AC") this.resetButton = "CE";
     if ((lastChar == "x" || lastChar == "+") || ((lastChar == "-") && twoCharBefore != "x" && twoCharBefore != "÷")) {
@@ -155,6 +175,12 @@ export class CalculatriceComponent implements OnInit {
 
   }
 
+  /**
+   * Add multiplication symbol to the calcul as string
+   * @param lastChar a string, the last char of the calcul as string
+   * @param length a number, lenght of the calcul as string 
+   * @param twoCharBefore a string, the char before last char of the calcul as string 
+   */
   addMultiplication = (lastChar: string, length: number, twoCharBefore: string) => {
     if (this.resetButton == "AC") this.resetButton = "CE";
     if ((lastChar == "÷" || lastChar == "+") || ((lastChar == "-") && twoCharBefore != "x" && twoCharBefore != "÷")) {
@@ -167,6 +193,12 @@ export class CalculatriceComponent implements OnInit {
     }
   }
 
+  /**
+   * Add addition symbol to the calcul as string
+   * @param lastChar a string, the last char of the calcul as string
+   * @param length a number, lenght of the calcul as string 
+   * @param twoCharBefore a string, the char before last char of the calcul as string 
+   */
   addAddition = (lastChar: string, length: number, twoCharBefore: string) => {
     if (this.resetButton == "AC") this.resetButton = "CE";
     if ((lastChar == "÷" || lastChar == "x") || ((lastChar == "-") && twoCharBefore != "x" && twoCharBefore != "÷")) {
@@ -179,7 +211,13 @@ export class CalculatriceComponent implements OnInit {
     }
   }
 
-  addSoustraction = (lastChar: string, length: number) => {
+  /**
+   * Add substraction symbol to the calcul as string
+   * @param lastChar a string, the last char of the calcul as string
+   * @param length a number, lenght of the calcul as string 
+   * @param twoCharBefore a string, the char before last char of the calcul as string 
+   */
+  addSubstraction = (lastChar: string, length: number) => {
     if (this.resetButton == "AC") this.resetButton = "CE";
     if (lastChar == "+") {
       this.txt = this.txt.substring(0, length - 1);
@@ -192,10 +230,17 @@ export class CalculatriceComponent implements OnInit {
     }
   }
 
+  /**
+   * Give the focus on the div element with id Lowerelement.
+   * Usefull to press keybutton from keyboard reacting with div input
+   */
   giveFocus = () => {
     document.getElementById("lowerElement")?.focus();
   }
 
+  /**
+   * Rename the answer into: "Ans =" + preivous res
+   */
   pushAnswer() {
     if (this.resetButton == "AC") {
       this.answer = "Ans = " + this.txt;
@@ -203,6 +248,11 @@ export class CalculatriceComponent implements OnInit {
     }
   }
 
+  /**
+   * Add dot symbol to the calcul as string
+   * @param lastChar a string, the last char of the calcul as string
+   * @param length a number, lenght of the calcul as string 
+   */
   addDot(lastChar: string, length: number) {
     if ((length == 1 && lastChar == "0") || (this.resetButton == "AC")) {
       this.resetButton = "CE";
@@ -216,12 +266,21 @@ export class CalculatriceComponent implements OnInit {
     }
   }
 
+  /**
+   * Check if we can request the back, it means that last char is valid (different then an operator)
+   * @param lastChar a string, the last char of the calcul as string
+   */
   egalTreatment(lastChar: string) {
     if (!["x", "+", "-", "÷"].includes(lastChar)) {
       this.resetButton = "AC";
       this.sendRequest();
     }
   }
+  /**
+   * User has clicked on history element.
+   * Then it replace the calcul string by the clicked element
+   * @param clickedElement 
+   */
   hasClickedOnHistory = (clickedElement: string) => {
     this.checkIfCanAddDot(clickedElement);
     this.txt = clickedElement;
@@ -231,12 +290,18 @@ export class CalculatriceComponent implements OnInit {
 
   }
 
+  /**
+   * Reset the can Add dot boolean depending on the calcul as string passed as parameter
+   * @param clickedElement calcul as string
+   */
   checkIfCanAddDot(clickedElement: string) {
+    console.log("je suis en train de check si can dot")
     if (clickedElement.includes(".")) {
       let splittedCacl = clickedElement.split(".")[clickedElement.split(".").length - 1];
       if (splittedCacl.includes("x") || splittedCacl.includes("-") || splittedCacl.includes("+") || splittedCacl.includes("÷")) {
         this.canAddDot = true;
       }
+      else this.canAddDot = false;
     }
   }
 }

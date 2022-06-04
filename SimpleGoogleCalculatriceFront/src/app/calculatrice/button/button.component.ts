@@ -16,12 +16,19 @@ export class ButtonComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Add a class to the element depending on the txtButton 
+   * @returns a string representing the class added to the element
+   */
   getClass = (): string => {
     if (this.txtButton == "=") return "blueBackground";
     else if (["x", "÷", "-", "+"].includes(this.txtButton)) return "greyBackground";
     else return "";
   }
 
+  /**
+   * Send to the parent an event with txtbutton value when is cliked on
+   */
   isClicked = () => {
     this.isClickedEvent.emit(this.txtButton);
   }

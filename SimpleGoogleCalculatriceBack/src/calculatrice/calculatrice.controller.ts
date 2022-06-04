@@ -6,6 +6,11 @@ export class CalculController {
         let calculAsString = req.body.calcul;
         return res.json("" + this.calcFromString(calculAsString));
     }
+    /**
+     * Return the value calculated of the string passing in param
+     * @param mystring a strin representing a calcul
+     * @returns a number which is calculated from the string 
+     */
     calcFromString = (mystring: string): number => {
         if (mystring.includes("+")) {
             let r = 0

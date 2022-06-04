@@ -4,8 +4,7 @@
             <div class="upperElement">
                 <mat-icon *ngIf="!displayPanel" (click)="displayPanel=true">access_time</mat-icon>
                 <app-panel *ngIf="displayPanel" [historyList]="historyList" (closePanelEvent)="displayPanel=false"
-                    (hasClickedOnCalcEvent)="hasClickedOnHistory($event)"
-                    (hasClickedOnResEvent)="hasClickedOnHistory($event)">
+                    (hasClickedOnCalcEvent)="hasClickedOnHistory($event)">
                 </app-panel>
                 {{answer}}
             </div>
