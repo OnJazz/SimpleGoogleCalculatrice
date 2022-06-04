@@ -35,14 +35,16 @@ export class CalculController {
         else {
             try {
                 if (mystring == "") return 0;
-                if (mystring.includes(".")) {
-                    return +parseFloat(mystring).toFixed(mystring.split(".")[1].length);
+                else if (mystring.includes(".")) {
+                    let res = parseFloat(mystring);
+                    return isNaN(res) ? 0 : res;
                 }
                 else {
                     return parseInt(mystring);
                 }
             }
             catch (error) {
+                console.log("jai plante")
                 return 0;
             }
         }

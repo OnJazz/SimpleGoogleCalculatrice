@@ -23,15 +23,16 @@ export class CalculatriceComponent implements OnInit {
 
   sendRequest = () => {
     this.calculService.getResultFromCalcul(this.txt).subscribe(res => {
+      console.log(res)
       this.historyList.push({ calcul: this.txt, res: res });
       this.answer = this.txt + " =";
       this.txt = res;
-      this.checkIfCanAddDot(this.txt);
+      this.checkIfCanAddDot(res);
     });
   }
-  checkIfCanAddDot = (txt: string) => {
-    this.canAddDot = !txt.includes(".");
-  }
+  // checkIfCanAddDot = (txt: string) => {
+  //   this.canAddDot = !txt.includes(".");
+  // }
   /**
    * Return a boolean that valid or not the key pressed
    * @param event a KeyBoardEvent 
@@ -185,7 +186,7 @@ export class CalculatriceComponent implements OnInit {
       this.txt += "-";
     }
     else if (lastChar == "0" && length == 1) this.txt = "-";
-    else if (lastChar != "-" && lastChar != ".") {
+    else if (lastChar != "-") {
       this.canAddDot = true;
       this.txt += "-";
     }
@@ -203,14 +204,12 @@ export class CalculatriceComponent implements OnInit {
   }
 
   addDot(lastChar: string, length: number) {
-    console.log("addDotfunction")
     if ((length == 1 && lastChar == "0") || (this.resetButton == "AC")) {
       this.resetButton = "CE";
       this.canAddDot = false;
       this.txt = ".";
     }
     if (lastChar != "." && this.canAddDot) {
-      console.log("inside if")
       this.resetButton = "CE";
       this.txt += ".";
       this.canAddDot = false;
@@ -224,12 +223,20 @@ export class CalculatriceComponent implements OnInit {
     }
   }
   hasClickedOnHistory = (clickedElement: string) => {
-    let length: number = clickedElement.length;
-    let lastChar: string = clickedElement.substring(length - 1);
-    this.canAddDot = lastChar != ".";
+    this.checkIfCanAddDot(clickedElement);
     this.txt = clickedElement;
     this.resetButton = "CE"
     this.displayPanel = false;
     this.giveFocus();
+
+  }
+
+  checkIfCanAddDot(clickedElement: string) {
+    if (clickedElement.includes(".")) {
+      let splittedCacl = clickedElement.split(".")[clickedElement.split(".").length - 1];
+      if (splittedCacl.includes("x") || splittedCacl.includes("-") || splittedCacl.includes("+") || splittedCacl.includes("÷")) {
+        this.canAddDot = true;
+      }
+    }
   }
 }
