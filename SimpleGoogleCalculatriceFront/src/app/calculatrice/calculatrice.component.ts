@@ -295,7 +295,6 @@ export class CalculatriceComponent implements OnInit {
    * @param clickedElement calcul as string
    */
   checkIfCanAddDot(clickedElement: string) {
-    console.log("je suis en train de check si can dot")
     if (clickedElement.includes(".")) {
       let splittedCacl = clickedElement.split(".")[clickedElement.split(".").length - 1];
       if (splittedCacl.includes("x") || splittedCacl.includes("-") || splittedCacl.includes("+") || splittedCacl.includes("÷")) {
