@@ -55,7 +55,7 @@ export class CalculatriceComponent implements OnInit {
         this.addSoustraction(lastChar, length);
       }
       else if (event.key == ".") {
-        this.addDot(lastChar);
+        this.addDot(lastChar, length);
       }
       else if (event.key == "Enter") {
         this.egalTreatment(lastChar);
@@ -63,7 +63,10 @@ export class CalculatriceComponent implements OnInit {
       else if (event.key == "Backspace") {
         let lastChar = this.txt[this.txt.length - 1];
         if (lastChar == ".") this.canAddDot = true;
-        if (length == 1) this.txt = "0";
+        if (length == 1 || this.resetButton == "AC") {
+          this.txt = "0";
+          this.canAddDot = true;
+        }
         else this.txt = this.txt.substring(0, length - 1);
       }
       else {
@@ -100,7 +103,7 @@ export class CalculatriceComponent implements OnInit {
     }
     else if (value == ".") {
       this.pushAnswer();
-      this.addDot(lastChar);
+      this.addDot(lastChar, length);
     }
     else if (value == "AC") {
       this.answer = "Ans = " + this.txt;
@@ -112,7 +115,7 @@ export class CalculatriceComponent implements OnInit {
       this.deletePrevious();
     }
     else this.addValue(value);
-    document.getElementById("lowerElement")?.focus();
+    this.giveFocus();
   }
 
   deletePrevious = () => {
@@ -124,11 +127,15 @@ export class CalculatriceComponent implements OnInit {
     }
   }
   addValue = (value: string) => {
-    if (this.txt == "0") this.txt = value;
+    if (this.txt == "0") {
+      this.txt = value;
+      this.resetButton = "CE";
+    }
     else if (this.resetButton == "AC") {
       this.answer = "Answ = " + this.txt;
       this.txt = value;
       this.resetButton = "CE";
+      this.canAddDot = true;
     }
     else this.txt += value;
   }
@@ -177,10 +184,15 @@ export class CalculatriceComponent implements OnInit {
       this.txt = this.txt.substring(0, length - 1);
       this.txt += "-";
     }
-    else if (lastChar != "-") {
+    else if (lastChar == "0" && length == 1) this.txt = "-";
+    else if (lastChar != "-" && lastChar != ".") {
       this.canAddDot = true;
       this.txt += "-";
     }
+  }
+
+  giveFocus = () => {
+    document.getElementById("lowerElement")?.focus();
   }
 
   pushAnswer() {
@@ -190,8 +202,16 @@ export class CalculatriceComponent implements OnInit {
     }
   }
 
-  addDot(lastChar: string) {
+  addDot(lastChar: string, length: number) {
+    console.log("addDotfunction")
+    if ((length == 1 && lastChar == "0") || (this.resetButton == "AC")) {
+      this.resetButton = "CE";
+      this.canAddDot = false;
+      this.txt = ".";
+    }
     if (lastChar != "." && this.canAddDot) {
+      console.log("inside if")
+      this.resetButton = "CE";
       this.txt += ".";
       this.canAddDot = false;
     }
@@ -204,7 +224,12 @@ export class CalculatriceComponent implements OnInit {
     }
   }
   hasClickedOnHistory = (clickedElement: string) => {
+    let length: number = clickedElement.length;
+    let lastChar: string = clickedElement.substring(length - 1);
+    this.canAddDot = lastChar != ".";
     this.txt = clickedElement;
     this.resetButton = "CE"
+    this.displayPanel = false;
+    this.giveFocus();
   }
 }
