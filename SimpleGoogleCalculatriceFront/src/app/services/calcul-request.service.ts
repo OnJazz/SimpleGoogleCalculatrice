@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
 export class CalculRequestService {
 
   constructor(private http: HttpClient) { }
-
   /**
    * Send a post request to the back end which is on localhost:3000 with a string as param
    * @param calcul a string representing a calcul

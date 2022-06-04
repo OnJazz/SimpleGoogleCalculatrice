@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CalculatriceComponent } from './calculatrice.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('CalculatriceComponent', () => {
   let component: CalculatriceComponent;
@@ -8,9 +9,10 @@ describe('CalculatriceComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CalculatriceComponent ]
+      imports: [HttpClientTestingModule],
+      declarations: [CalculatriceComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -21,5 +23,21 @@ describe('CalculatriceComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  //resetCanAddDot
+  it('resetCanAddDot when no operator', () => {
+    component.canAddDot = false;
+    component.resetCanAddDot("0.2");
+    expect(component.canAddDot).toBe(false);
+  });
+  it('resetCanAddDot when empty', () => {
+    component.canAddDot = false;
+    component.resetCanAddDot("");
+    expect(component.canAddDot).toBe(true);
+  });
+  it('resetCanAddDot when operator after dot', () => {
+    component.canAddDot = false;
+    component.resetCanAddDot("0.2+2");
+    expect(component.canAddDot).toBe(true);
   });
 });

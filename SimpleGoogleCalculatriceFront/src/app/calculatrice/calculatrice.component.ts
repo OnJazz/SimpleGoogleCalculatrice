@@ -31,7 +31,7 @@ export class CalculatriceComponent implements OnInit {
       this.historyList.push({ calcul: this.txt, res: res });
       this.answer = this.txt + " =";
       this.txt = res;
-      this.checkIfCanAddDot(res);
+      this.resetCanAddDot(res);
     });
   }
 
@@ -282,7 +282,7 @@ export class CalculatriceComponent implements OnInit {
    * @param clickedElement 
    */
   hasClickedOnHistory = (clickedElement: string) => {
-    this.checkIfCanAddDot(clickedElement);
+    this.resetCanAddDot(clickedElement);
     this.txt = clickedElement;
     this.resetButton = "CE"
     this.displayPanel = false;
@@ -294,7 +294,7 @@ export class CalculatriceComponent implements OnInit {
    * Reset the can Add dot boolean depending on the calcul as string passed as parameter
    * @param clickedElement calcul as string
    */
-  checkIfCanAddDot(clickedElement: string) {
+  resetCanAddDot(clickedElement: string) {
     if (clickedElement.includes(".")) {
       let splittedCacl = clickedElement.split(".")[clickedElement.split(".").length - 1];
       if (splittedCacl.includes("x") || splittedCacl.includes("-") || splittedCacl.includes("+") || splittedCacl.includes("÷")) {
@@ -302,5 +302,6 @@ export class CalculatriceComponent implements OnInit {
       }
       else this.canAddDot = false;
     }
+    else this.canAddDot = true;
   }
 }
