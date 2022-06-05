@@ -51,7 +51,7 @@ npm run dev
 ```
 
 
-## How to run test ? 
+## How to run test ? :mag:
 ### Front test
 To run Front-End test , first go in the folder :open_file_folder: ./SimpleGoogleCalculatriceFront.
 Install the node dependencies by running 
