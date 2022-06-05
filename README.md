@@ -2,7 +2,8 @@
 Simple calculatrice google exercice.   
 This exercice is about a web app. This web app is a calculator online.   
 You can interact with it by clicking on button but also with keyboard inputs.   
-This calculator is able to handle negative numbers, floating numbers, division, substraction, addition and multiplication.   
+This calculator is able to handle negative numbers, floating numbers, division, substraction, addition and multiplication.  
+Matter of time, this calculator does not support exponential writing
 Calcul are made by a backend api which is basicly calculating it without any pre-done algorithms. 
 
 # Front end
