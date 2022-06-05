@@ -1,19 +1,19 @@
 # SimpleGoogleCalculatrice
-Simple calculatrice google exercice. 
-This exercice is about a web app. This web app is a calculator online.
-You can interact with it by clicking on button but also with keyboard inputs.
-This calculator is able to handle negative numbers, floating numbers, division, substraction, addition and multiplication.
+Simple calculatrice google exercice.   
+This exercice is about a web app. This web app is a calculator online.   
+You can interact with it by clicking on button but also with keyboard inputs.   
+This calculator is able to handle negative numbers, floating numbers, division, substraction, addition and multiplication.   
 Calcul are made by a backend api which is basicly calculating it without any pre-done algorithms. 
-For aesthetic reasons i am using Material in front-end.
 
 # Front end
 
-Front-end is developed in Angular. Also i use material for aesthetic. 
-In this front end you are able to interact with the calculator by clicking on differents buttons but also by pressing keyboards input when you focus the calculator input. Finally, you will be able to see your history and click on it to get back the calcul
+Front-end is developed in Angular. Also i use material for aesthetic.   
+In this front end you are able to interact with the calculator by clicking on differents buttons but also by pressing keyboards input when you focus the calculator input.   
+Finally, you will be able to see your history and click on it to get back the calcul
 
 # Back end
 
-Back end is developed is NodeJs. For readability reasons i use typescript as main language.
+Back end is developed is NodeJs. For readability reasons i use typescript as main language.   
 Nodejs Api is calculated a string representing a calcul like "2+3x6".
 To calcul it we have done a recursive algorithm which mean that we have not calculated it by pre-done algorithm. 
 
