@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CalculatriceComponent } from './calculatrice.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ButtonComponent } from './button/button.component';
+import { AppModule } from '../app.module';
 
 describe('CalculatriceComponent', () => {
   let component: CalculatriceComponent;
@@ -8,8 +10,8 @@ describe('CalculatriceComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      declarations: [CalculatriceComponent]
+      imports: [HttpClientTestingModule, AppModule],
+      declarations: [CalculatriceComponent, ButtonComponent]
     })
       .compileComponents();
   });
