@@ -19,7 +19,7 @@ To calcul it we have done a recursive algorithm which mean that we have not calc
 
 # How to run it ? :computer:
 ## With Docker :whale:
-To run it, just go in the folder :open_file_folder: ./SimpleGoogleCalculatrice and run the command
+To run it, just go in the folder :open_file_folder: ./SimpleGoogleCalculatrice and run the command in a cmd
 ```bash
 docker-compose up
 ```
@@ -31,21 +31,21 @@ To install it without docker make sure first to install node and angular
 
 ### Run Front-End
 To run Front-End, first go in the folder :open_file_folder: ./SimpleGoogleCalculatriceFront.
-Install the node dependencies by running 
+Install the node dependencies by running in a cmd
 ```bash
 npm i
 ```
-then run it by running 
+then run it by running in a cmd
 ```bash
 ng serve -o
 ```
 ### Run Back-End
 To run Back-End, first go in the folder :open_file_folder: ./SimpleGoogleCalculatriceBack.
-Install the node dependencies by running 
+Install the node dependencies by running in a cmd
 ```bash
 npm i
 ```
-then run it by running 
+then run it by running in a cmd
 ```bash
 npm run dev
 ```
@@ -54,22 +54,22 @@ npm run dev
 ## How to run test ? :mag:
 ### Front-End test
 To run Front-End test , first go in the folder :open_file_folder: ./SimpleGoogleCalculatriceFront.
-Install the node dependencies by running 
+Install the node dependencies by running in a cmd
 ```bash
 npm i
 ```
-then run it by running 
+then run it by running in a cmd
 ```bash
 ng test
 ```
 ### Back-End test
 I am using Jest Framework to do Back-End test.   
 To run Back-End test, first go in the folder :open_file_folder: ./SimpleGoogleCalculatriceBack.
-Install the node dependencies by running 
+Install the node dependencies by running in a cmd
 ```bash
 npm i
 ```
-then run it by running 
+then run it by running in a cmd
 ```bash
 npm run test
 ```
