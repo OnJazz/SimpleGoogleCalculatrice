@@ -19,7 +19,7 @@ To calcul it we have done a recursive algorithm which mean that we have not calc
 
 # How to run it ? :computer:
 ## With Docker
-To run it, just go in the folder ./SimpleGoogleCalculatrice and run the command
+To run it, just go in the folder :open_file_folder: ./SimpleGoogleCalculatrice and run the command
 ```bash
 docker-compose up
 ```
@@ -30,7 +30,7 @@ To install it without docker make sure first to install node and angular
 [https://nodejs.dev/learn/how-to-install-nodejs]
 
 ### Run Front-End
-To run Front-End, first go in the folder ./SimpleGoogleCalculatriceFront.
+To run Front-End, first go in the folder :open_file_folder: ./SimpleGoogleCalculatriceFront.
 Install the node dependencies by running 
 ```bash
 npm i
@@ -40,7 +40,7 @@ then run it by running
 ng serve -o
 ```
 ### Run Back-End
-To run Back-End, first go in the folder ./SimpleGoogleCalculatriceBack.
+To run Back-End, first go in the folder :open_file_folder: ./SimpleGoogleCalculatriceBack.
 Install the node dependencies by running 
 ```bash
 npm i
@@ -53,7 +53,7 @@ npm run dev
 
 ## How to run test ? 
 ### Front test
-To run Front-End test , first go in the folder ./SimpleGoogleCalculatriceFront.
+To run Front-End test , first go in the folder :open_file_folder: ./SimpleGoogleCalculatriceFront.
 Install the node dependencies by running 
 ```bash
 npm i
