@@ -13,7 +13,10 @@ describe('CalculRequestService', () => {
     service = TestBed.inject(CalculRequestService);
   });
 
-  it('should be created', () => {
+  it('should return a string representing a digit from the service', () => {
+    service.getResultFromCalcul("2+2").subscribe(res => {
+      expect(res).toBe("4");
+    })
     expect(service).toBeTruthy();
   });
 });
