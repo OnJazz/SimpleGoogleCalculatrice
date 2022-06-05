@@ -8,6 +8,6 @@ services:
     restart: unless-stopped
 
   front:
-    build: SimpleGoogleCalculatriceFront
+    build: ./SimpleGoogleCalculatriceFront
     ports:
       - 4200:80
