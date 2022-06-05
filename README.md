@@ -1,4 +1,4 @@
-# SimpleGoogleCalculatrice
+# SimpleGoogleCalculatrice :heavy_division_sign::heavy_multiplication_x::heavy_minus_sign::heavy_plus_sign:
 Simple calculatrice google exercice.   
 This exercice is about a web app. This web app is a calculator online.   
 You can interact with it by clicking on button but also with keyboard inputs.   
@@ -25,7 +25,7 @@ docker-compose up
 ```
 Then just open your favorite browser and go on "localhost:4200"
 ## Without Docker
-### Warning
+### :warning: Warning
 To install it without docker make sure first to install node and angular
 [https://nodejs.dev/learn/how-to-install-nodejs]
 
