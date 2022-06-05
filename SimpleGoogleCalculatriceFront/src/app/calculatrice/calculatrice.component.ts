@@ -15,6 +15,7 @@ export class CalculatriceComponent implements OnInit {
   resetButton: string = "CE";
   canAddDot: boolean = true;
   displayPanel = false;
+  isFirstCal = true;
   historyList: HistoryElement[] = [];
   constructor(private calculService: CalculRequestService) { }
 
@@ -27,7 +28,6 @@ export class CalculatriceComponent implements OnInit {
    */
   sendRequest = () => {
     this.calculService.getResultFromCalcul(this.txt).subscribe(res => {
-      console.log(res)
       this.historyList.push({ calcul: this.txt, res: res });
       this.answer = this.txt + " =";
       this.txt = res;
@@ -116,7 +116,6 @@ export class CalculatriceComponent implements OnInit {
     else if (value == "AC") {
       this.answer = "Ans = " + this.txt;
       this.txt = "0";
-      this.resetButton = "CE";
       this.canAddDot = true;
     }
     else if (value == "CE") {
@@ -143,12 +142,17 @@ export class CalculatriceComponent implements OnInit {
    * @param value a value to add into the calcul as string. Depending valid key it should be (0... 9)
    */
   addValue = (value: string) => {
-    if (this.txt == "0") {
+    if (this.txt == "0" && this.isFirstCal) {
+      this.txt = value;
+      this.resetButton = "CE";
+      this.isFirstCal = false;
+    }
+    else if (this.txt == "0") {
       this.txt = value;
       this.resetButton = "CE";
     }
     else if (this.resetButton == "AC") {
-      this.answer = "Answ = " + this.txt;
+      this.answer = "Ans = " + this.txt;
       this.txt = value;
       this.resetButton = "CE";
       this.canAddDot = true;

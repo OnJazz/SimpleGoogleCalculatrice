@@ -8,9 +8,9 @@ describe('ButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ButtonComponent ]
+      declarations: [ButtonComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -21,5 +21,24 @@ describe('ButtonComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  //get
+  it('should return blueBackground when =', () => {
+    component.txtButton = "="
+    expect(component.getClass()).toBe("blueBackground");
+  });
+  it('should return greyBackground when txt is an operator', () => {
+    component.txtButton = "x"
+    expect(component.getClass()).toBe("greyBackground");
+    component.txtButton = "+"
+    expect(component.getClass()).toBe("greyBackground");
+    component.txtButton = "-"
+    expect(component.getClass()).toBe("greyBackground");
+    component.txtButton = "÷"
+    expect(component.getClass()).toBe("greyBackground");
+  });
+  it('should return empty string when not an operator or equal symbol', () => {
+    component.txtButton = "idfj"
+    expect(component.getClass()).toBe("");
   });
 });
