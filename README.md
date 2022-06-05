@@ -18,7 +18,7 @@ Nodejs Api is calculated a string representing a calcul like "2+3x6".
 To calcul it we have done a recursive algorithm which mean that we have not calculated it by pre-done algorithm. 
 
 # How to run it ? :computer:
-## With Docker
+## With Docker :whale:
 To run it, just go in the folder :open_file_folder: ./SimpleGoogleCalculatrice and run the command
 ```bash
 docker-compose up
