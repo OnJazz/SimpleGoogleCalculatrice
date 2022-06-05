@@ -52,7 +52,7 @@ npm run dev
 
 
 ## How to run test ? :mag:
-### Front test
+### Front-End test
 To run Front-End test , first go in the folder :open_file_folder: ./SimpleGoogleCalculatriceFront.
 Install the node dependencies by running 
 ```bash
@@ -61,4 +61,15 @@ npm i
 then run it by running 
 ```bash
 ng test
+```
+### Back-End test
+I am using Jest Framework to do Back-End test.   
+To run Back-End test, first go in the folder :open_file_folder: ./SimpleGoogleCalculatriceBack.
+Install the node dependencies by running 
+```bash
+npm i
+```
+then run it by running 
+```bash
+npm run test
 ```
