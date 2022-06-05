@@ -17,7 +17,7 @@ Back end is developed is NodeJs. For readability reasons i use typescript as mai
 Nodejs Api is calculated a string representing a calcul like "2+3x6".
 To calcul it we have done a recursive algorithm which mean that we have not calculated it by pre-done algorithm. 
 
-# How to run it ? 
+# How to run it ? :computer:
 ## With Docker
 To run it, just go in the folder ./SimpleGoogleCalculatrice and run the command
 ```bash
