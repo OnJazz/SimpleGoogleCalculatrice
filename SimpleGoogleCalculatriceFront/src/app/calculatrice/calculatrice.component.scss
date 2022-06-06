@@ -32,12 +32,13 @@
         #lowerElement {
             display: flex;
             justify-content: end;
-            font-size: 30px;
+            font-size: 25px;
             font-family: arial, sans-serif;
             height: 32px;
             border: none;
             width: 100%;
             outline: none;
+            overflow-x: hidden;
         }
 
         .lowerElement:focus {
